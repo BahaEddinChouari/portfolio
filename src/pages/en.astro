@@ -1,16 +1,15 @@
 ---
 import { getSiteConfig, getSiteContent } from "@config";
-import Hero from "@components/Hero.astro";
 import Layout from "@layouts/Layout.astro";
+import Hero from "@components/Hero.astro";
 import Experience from "@components/Experience.astro";
 import Projects from "@components/Projects.astro";
-import AcademicProjects from "@components/AcademicProjects.astro";
-import About from "@components/About.astro";
 import Education from "@components/Education.astro";
-import Skills from "@components/Skills.astro";
 import CaseStudy from "@components/CaseStudy.astro";
+import Skills from "@components/Skills.astro";
+import About from "@components/About.astro";
+import AcademicProjects from "@components/AcademicProjects.astro";
 import { I18N } from "@config/i18n";
-
 import "../styles/global.css";
 
 const locale = "en";
@@ -22,8 +21,8 @@ const siteContent = getSiteContent(locale);
 <Layout config={siteConfig}>
   <Hero {...siteContent.hero} />
   <Experience experience={siteContent.experience} title={t.sections.workExperience} />
-  <Projects 
-    projects={siteContent.projects} 
+  <Projects
+    projects={siteContent.projects}
     title={t.sections.projects}
     labels={{
       source: t.ui.source,
@@ -40,7 +39,21 @@ const siteContent = getSiteContent(locale);
   {siteContent.academicProjects && (
     <AcademicProjects academicProjects={siteContent.academicProjects} title={t.sections.academicProjects} />
   )}
-  {siteContent.education && <Education education={siteContent.education} title={t.sections.education} />}
-  {siteContent.skills && <Skills skills={siteContent.skills} title={t.sections.skills} />}
+  {siteContent.education && (
+    <Education education={siteContent.education} title={t.sections.education} />
+  )}
+  {siteContent.skills && (
+    <Skills skills={siteContent.skills} title={t.sections.skills} labels={{
+      programming: "Programming",
+      mobile: "Mobile",
+      webFrameworks: "Web / Frameworks",
+      databases: "Databases",
+      bigDataAI: "Big Data & AI",
+      devOps: "DevOps",
+      spokenLanguages: "Spoken Languages",
+    }} />
+  )}
   <About {...siteContent.about} name={siteContent.hero.name} title={t.sections.about} />
 </Layout>
+
+

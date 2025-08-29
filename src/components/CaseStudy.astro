@@ -1,0 +1,92 @@
+---
+import Section from "./Section.astro";
+
+export interface CaseStudyProps {  // ← export added
+  name: string;
+  overview: string[];
+  critiques?: string[];
+  solutions?: string[];
+  actors?: string[];
+  functionalRequirements?: string[];
+  nonFunctionalRequirements?: string[];
+  currentUse?: string;
+  tech?: string[];
+}
+interface Labels {
+  overview: string;
+  critiques?: string;
+  solutions?: string;
+  actors?: string;
+  functionalRequirements?: string;
+  nonFunctionalRequirements?: string;
+  currentUse?: string;
+  tech?: string;
+}
+
+export interface Props {  // ← export added so Astro exposes component props
+  caseStudy: CaseStudyProps;
+  labels: Labels;
+}
+
+const { caseStudy, labels } = Astro.props as Props;
+---
+
+<Section text={labels.overview ?? caseStudy.name} href="case-study">
+  <div class="space-y-6">
+    <h3 class="font-serif text-2xl font-medium text-primary">{caseStudy.name}</h3>
+    <div class="space-y-3">
+      {caseStudy.overview.map((p) => (
+        <p class="text-neutral">{p}</p>
+      ))}
+    </div>
+
+    {caseStudy.critiques && (
+      <div class="mt-4">
+        <h4 class="font-semibold text-neutral">{labels.critiques ?? "Critiques"}</h4>
+        <ul class="mt-2 list-disc list-inside space-y-1 text-neutral">
+          {caseStudy.critiques.map((c) => <li>{c}</li>)}
+        </ul>
+      </div>
+    )}
+    {caseStudy.solutions && (
+      <div class="mt-4">
+        <h4 class="font-semibold text-neutral">{labels.solutions ?? "Solutions"}</h4>
+        <ul class="mt-2 list-disc list-inside space-y-1 text-neutral">
+          {caseStudy.solutions.map((s) => <li>{s}</li>)}
+        </ul>
+      </div>
+    )}
+    {caseStudy.actors && (
+      <div class="mt-4">
+        <h4 class="font-semibold text-neutral">{labels.actors ?? "Actors"}</h4>
+        <p class="mt-2 text-neutral">{caseStudy.actors.join(", ")}</p>
+      </div>
+    )}
+    {caseStudy.functionalRequirements && (
+      <div class="mt-4">
+        <h4 class="font-semibold text-neutral">{labels.functionalRequirements ?? "Functional Requirements"}</h4>
+        <ul class="mt-2 list-disc list-inside space-y-1 text-neutral">
+          {caseStudy.functionalRequirements.map((r) => <li>{r}</li>)}
+        </ul>
+      </div>
+    )}
+    {caseStudy.nonFunctionalRequirements && (
+      <div class="mt-4">
+        <h4 class="font-semibold text-neutral">{labels.nonFunctionalRequirements ?? "Non-Functional Requirements"}</h4>
+        <ul class="mt-2 list-disc list-inside space-y-1 text-neutral">
+          {caseStudy.nonFunctionalRequirements.map((r) => <li>{r}</li>)}
+        </ul>
+      </div>
+    )}
+    {caseStudy.tech && caseStudy.tech.length > 0 && (
+      <div class="mt-4">
+        <h4 class="font-semibold text-neutral">{labels.tech}</h4>
+        <div class="mt-2 flex flex-wrap gap-2">
+          {caseStudy.tech.map((t) => (
+            <span class="rounded-full border border-neutral/20 px-3 py-1 text-sm text-neutral">{t}</span>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</Section>

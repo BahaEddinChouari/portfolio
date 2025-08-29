@@ -3,12 +3,12 @@ import Section from "./Section.astro";
 import { Image } from "astro:assets";
 import type { AboutProps, HeroProps } from "@types";
 
-type Props = AboutProps & Pick<HeroProps, "name">;
+type Props = (AboutProps & Pick<HeroProps, "name">) & { title?: string };
 
-const { description, image, name } = Astro.props;
+const { description, image, name, title } = Astro.props as Props;
 ---
 
-<Section text="About Me" href="about">
+<Section text={title ?? "About Me"} href="about">
   <div class="flex flex-col items-center gap-12 md:flex-row md:gap-8">
     <p class="w-auto text-base text-neutral md:pr-5">{description}</p>
     <div

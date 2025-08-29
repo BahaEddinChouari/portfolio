@@ -2,21 +2,24 @@
 import Menu from "@icons/Menu.astro";
 import { Image } from "astro:assets";
 import type { HeaderProps } from "@types";
+import LanguageToggle from "./LanguageToggle.astro";
 
 type Props = HeaderProps;
 
 const { siteLogo, navLinks } = Astro.props;
+const currentPath = Astro.url.pathname;
+const currentLocale = currentPath.startsWith("/fr") ? "fr" : "en";
 ---
 
 <header
   class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-black px-5 py-6"
->
+> 
   <a href="/" aria-label="Home link">
     <Image
       class="rounded-full"
       src={siteLogo}
-      width="45"
-      height="45"
+      width="60"
+      height="60"
       alt="website logo"
     />
   </a>
@@ -35,7 +38,7 @@ const { siteLogo, navLinks } = Astro.props;
     class="absolute top-20 right-5 hidden rounded-xl border border-neutral/40 bg-black px-4 py-5 text-neutral sm:static sm:block sm:border-0 sm:bg-transparent sm:p-0"
     id="main-menu"
   >
-    <ul class="gap-2 sm:flex">
+    <ul class="gap-2 sm:flex items-center">
       {
         navLinks.map((link) => (
           <li class="relative">
@@ -48,6 +51,9 @@ const { siteLogo, navLinks } = Astro.props;
           </li>
         ))
       }
+      <li class="relative">
+        <LanguageToggle currentLocale={currentLocale} />
+      </li>
     </ul>
   </nav>
 </header>
@@ -84,7 +90,7 @@ const { siteLogo, navLinks } = Astro.props;
         }
       });
     },
-    { threshold: 0.5 },
+    { threshold: 0.25 },
   );
 
   document.querySelectorAll("section").forEach((section) => {
