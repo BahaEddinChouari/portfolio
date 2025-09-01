@@ -1,0 +1,137 @@
+---
+const { currentLocale } = Astro.props;
+const targetLocale = currentLocale === "en" ? "fr" : "en";
+const targetLabel = targetLocale.toUpperCase();
+---
+
+<div class="language-toggle">
+  <button id="language-toggle-btn" data-target-locale={targetLocale} class="toggle-button">
+    <div class="toggle-container">
+      <div class={`toggle-option ${currentLocale === "en" ? "active" : ""}`}>
+        <span class="toggle-text">EN</span>
+      </div>
+      <div class={`toggle-option ${currentLocale === "fr" ? "active" : ""}`}>
+        <span class="toggle-text">FR</span>
+      </div>
+      <div class={`toggle-slider ${currentLocale === "fr" ? "right" : "left"}`}></div>
+    </div>
+  </button>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('language-toggle-btn');
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetLocale = toggleBtn.getAttribute('data-target-locale');
+        const currentUrl = window.location.pathname;
+        const currentHash = window.location.hash;
+        
+        // Construire la nouvelle URL
+        let newUrl;
+        if (targetLocale === 'en') {
+          newUrl = '/';
+        } else {
+          newUrl = `/${targetLocale}`;
+        }
+        
+        // Sauvegarder la position de défilement actuelle
+        const scrollPosition = window.scrollY;
+        
+        // Changer l'URL sans rafraîchir la page
+        window.history.pushState({}, '', newUrl + currentHash);
+        
+        // Stocker la position de défilement
+        sessionStorage.setItem('scrollPosition', scrollPosition.toString());
+        
+        // Recharger la page mais avec un indicateur pour restaurer la position
+        sessionStorage.setItem('preserveScroll', 'true');
+        window.location.href = newUrl + currentHash;
+      });
+    }
+    
+    // Restaurer la position de défilement si nécessaire
+    if (sessionStorage.getItem('preserveScroll') === 'true') {
+      const savedPosition = parseInt(sessionStorage.getItem('scrollPosition') || '0');
+      window.scrollTo(0, savedPosition);
+      sessionStorage.removeItem('preserveScroll');
+      sessionStorage.removeItem('scrollPosition');
+    }
+  });
+</script>
+
+<style>
+  .language-toggle {
+    position: relative;
+    display: inline-block;
+  }
+
+  .toggle-button {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .toggle-container {
+    position: relative;
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    padding: 3px;
+    width: 80px;
+    height: 34px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+  }
+
+  .toggle-option {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    color: rgba(255, 255, 255, 0.6);
+    transition: color 0.3s ease;
+  }
+
+  .toggle-option.active {
+    color: #fff;
+  }
+
+  .toggle-text {
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+
+  .toggle-slider {
+    position: absolute;
+    top: 3px;
+    height: calc(100% - 6px);
+    width: calc(50% - 3px);
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border-radius: 24px;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .toggle-slider.left {
+    transform: translateX(0);
+  }
+
+  .toggle-slider.right {
+    transform: translateX(100%);
+  }
+
+  .toggle-container:hover .toggle-slider {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  }
+</style>

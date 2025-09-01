@@ -1,0 +1,19 @@
+---
+import type { SiteConfig } from "@types";
+
+type Props = Pick<SiteConfig, "author">;
+
+const { author } = Astro.props as Props;
+const currentYear = new Date().getFullYear();
+---
+
+<footer
+  class="w-full border-t border-neutral/20 px-5 pt-5 pb-8 text-center text-white"
+>
+  
+  <p class="text-xs">
+    {author} © {currentYear}. <span class="text-neutral"
+      >Designed & Developed by</span
+    > Sywar Bannour
+  </p>
+</footer>

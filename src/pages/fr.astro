@@ -1,0 +1,60 @@
+---
+import { getSiteConfig, getSiteContent } from "@config";
+import Layout from "@layouts/Layout.astro";
+import Hero from "@components/Hero.astro";
+import Experience from "@components/Experience.astro";
+import Projects from "@components/Projects.astro";
+import Education from "@components/Education.astro";
+import Skills from "@components/Skills.astro";
+import About from "@components/About.astro";
+import CaseStudy from "@components/CaseStudy.astro";
+import AcademicProjects from "@components/AcademicProjects.astro";
+import { I18N } from "@config/i18n";
+import "../styles/global.css";
+
+const locale = "fr";
+const t = I18N[locale];
+const siteConfig = getSiteConfig(locale);
+const siteContent = getSiteContent(locale);
+---
+
+<Layout config={siteConfig}>
+  <Hero {...siteContent.hero} />
+  <Experience experience={siteContent.experience} title={t.sections.workExperience} />
+  <Projects
+    projects={siteContent.projects}
+    title={t.sections.projects}
+    labels={{
+      source: t.ui.source,
+      details: t.ui.details,
+      overview: t.ui.overview,
+      tech: t.ui.tech,
+      outcomes: t.ui.outcomes,
+      close: t.ui.close,
+    }}
+  />
+  {siteContent.caseStudy && (
+    <CaseStudy caseStudy={siteContent.caseStudy} labels={{ overview: t.ui.overview, currentUse: "Utilisation Actuelle", tech: t.ui.tech }} />
+  )}
+  {siteContent.academicProjects && (
+    <AcademicProjects academicProjects={siteContent.academicProjects} title={t.sections.academicProjects} />
+  )}
+  {siteContent.education && (
+    <Education education={siteContent.education} title={t.sections.education} />
+  )}
+  {siteContent.skills && (
+    <Skills skills={siteContent.skills} title={t.sections.skills} labels={{
+      programming: "Programmation",
+      mobile: "Mobile",
+      webFrameworks: "Web / Frameworks",
+      databases: "Bases de données",
+      bigDataAI: "Big Data & IA",
+      devOps: "DevOps",
+      spokenLanguages: "Langues",
+    }} />
+  )}
+  <About {...siteContent.about} name={siteContent.hero.name} title={t.sections.about} />
+</Layout>
+
+
+

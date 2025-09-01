@@ -1,0 +1,110 @@
+---
+import Section from "./Section.astro";
+import type { SkillsProps } from "@types";
+
+interface Props {
+  skills: SkillsProps;
+  title?: string;
+  labels?: {
+    programming?: string;
+    mobile?: string;
+    webFrameworks?: string;
+    databases?: string;
+    bigDataAI?: string;
+    devOps?: string;
+    spokenLanguages?: string;
+  };
+}
+
+const { skills, title, labels } = Astro.props as Props;
+---
+
+<Section text={title ?? "Skills"} href="skills">
+  <div class="grid gap-6 sm:grid-cols-2">
+    {skills.programmingLanguages && skills.programmingLanguages.length > 0 && (
+      <div class="group relative rounded-2xl border border-neutral/20 bg-gradient-to-br from-[#0b0f14] to-[#0f141b] p-5 ring-1 ring-transparent transition-all hover:border-primary/50 hover:shadow-[0_10px_60px_rgba(87,85,255,0.12)] hover:ring-primary/20">
+        <span aria-hidden="true" class="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary/20 blur-2xl opacity-0 transition-opacity group-hover:opacity-100"></span>
+        <h4 class="mb-3 text-sm font-medium text-neutral">{labels?.programming ?? "Programming"}</h4>
+        <div class="flex flex-wrap gap-2">
+          {skills.programmingLanguages.map((i) => (
+            <span class="rounded-full border border-neutral/20 px-3 py-1 text-sm text-neutral transition-colors hover:border-primary/60 hover:text-white">{i}</span>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {skills.mobile && skills.mobile.length > 0 && (
+      <div class="group relative rounded-2xl border border-neutral/20 bg-gradient-to-br from-[#0b0f14] to-[#0f141b] p-5 ring-1 ring-transparent transition-all hover:border-primary/50 hover:shadow-[0_10px_60px_rgba(87,85,255,0.12)] hover:ring-primary/20">
+        <span aria-hidden="true" class="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary/20 blur-2xl opacity-0 transition-opacity group-hover:opacity-100"></span>
+        <h4 class="mb-3 text-sm font-medium text-neutral">{labels?.mobile ?? "Mobile"}</h4>
+        <div class="flex flex-wrap gap-2">
+          {skills.mobile.map((i) => (
+            <span class="rounded-full border border-neutral/20 px-3 py-1 text-sm text-neutral transition-colors hover:border-primary/60 hover:text-white">{i}</span>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {skills.webFrameworks && skills.webFrameworks.length > 0 && (
+      <div class="group relative rounded-2xl border border-neutral/20 bg-gradient-to-br from-[#0b0f14] to-[#0f141b] p-5 ring-1 ring-transparent transition-all hover:border-primary/50 hover:shadow-[0_10px_60px_rgba(87,85,255,0.12)] hover:ring-primary/20">
+        <span aria-hidden="true" class="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary/20 blur-2xl opacity-0 transition-opacity group-hover:opacity-100"></span>
+        <h4 class="mb-3 text-sm font-medium text-neutral">{labels?.webFrameworks ?? "Web / Frameworks"}</h4>
+        <div class="flex flex-wrap gap-2">
+          {skills.webFrameworks.map((i) => (
+            <span class="rounded-full border border-neutral/20 px-3 py-1 text-sm text-neutral transition-colors hover:border-primary/60 hover:text-white">{i}</span>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {skills.databases && skills.databases.length > 0 && (
+      <div class="group relative rounded-2xl border border-neutral/20 bg-gradient-to-br from-[#0b0f14] to-[#0f141b] p-5 ring-1 ring-transparent transition-all hover:border-primary/50 hover:shadow-[0_10px_60px_rgba(87,85,255,0.12)] hover:ring-primary/20">
+        <span aria-hidden="true" class="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary/20 blur-2xl opacity-0 transition-opacity group-hover:opacity-100"></span>
+        <h4 class="mb-3 text-sm font-medium text-neutral">{labels?.databases ?? "Databases"}</h4>
+        <div class="flex flex-wrap gap-2">
+          {skills.databases.map((i) => (
+            <span class="rounded-full border border-neutral/20 px-3 py-1 text-sm text-neutral transition-colors hover:border-primary/60 hover:text-white">{i}</span>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {skills.bigDataAI && skills.bigDataAI.length > 0 && (
+      <div class="group relative rounded-2xl border border-neutral/20 bg-gradient-to-br from-[#0b0f14] to-[#0f141b] p-5 ring-1 ring-transparent transition-all hover:border-primary/50 hover:shadow-[0_10px_60px_rgba(87,85,255,0.12)] hover:ring-primary/20">
+        <span aria-hidden="true" class="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary/20 blur-2xl opacity-0 transition-opacity group-hover:opacity-100"></span>
+        <h4 class="mb-3 text-sm font-medium text-neutral">{labels?.bigDataAI ?? "Big Data & AI"}</h4>
+        <div class="flex flex-wrap gap-2">
+          {skills.bigDataAI.map((i) => (
+            <span class="rounded-full border border-neutral/20 px-3 py-1 text-sm text-neutral transition-colors hover:border-primary/60 hover:text-white">{i}</span>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {skills.devOps && skills.devOps.length > 0 && (
+      <div class="group relative rounded-2xl border border-neutral/20 bg-gradient-to-br from-[#0b0f14] to-[#0f141b] p-5 ring-1 ring-transparent transition-all hover:border-primary/50 hover:shadow-[0_10px_60px_rgba(87,85,255,0.12)] hover:ring-primary/20">
+        <span aria-hidden="true" class="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary/20 blur-2xl opacity-0 transition-opacity group-hover:opacity-100"></span>
+        <h4 class="mb-3 text-sm font-medium text-neutral">{labels?.devOps ?? "DevOps"}</h4>
+        <div class="flex flex-wrap gap-2">
+          {skills.devOps.map((i) => (
+            <span class="rounded-full border border-neutral/20 px-3 py-1 text-sm text-neutral transition-colors hover:border-primary/60 hover:text-white">{i}</span>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {skills.spokenLanguages && skills.spokenLanguages.length > 0 && (
+      <div class="group relative rounded-2xl border border-neutral/20 bg-gradient-to-br from-[#0b0f14] to-[#0f141b] p-5 ring-1 ring-transparent transition-all hover:border-primary/50 hover:shadow-[0_10px_60px_rgba(87,85,255,0.12)] hover:ring-primary/20">
+        <span aria-hidden="true" class="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary/20 blur-2xl opacity-0 transition-opacity group-hover:opacity-100"></span>
+        <h4 class="mb-3 text-sm font-medium text-neutral">{labels?.spokenLanguages ?? "Spoken Languages"}</h4>
+        <div class="flex flex-wrap gap-2">
+          {skills.spokenLanguages.map((i) => (
+            <span class="rounded-full border border-neutral/20 px-3 py-1 text-sm text-neutral transition-colors hover:border-primary/60 hover:text-white">{i}</span>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</Section>
+
+
