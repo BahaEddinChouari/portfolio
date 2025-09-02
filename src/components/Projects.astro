@@ -21,7 +21,7 @@ const { projects, title, labels } = Astro.props as Props;
 
 <Section text={title ?? "Featured Projects"} href="projects">
   {
-    projects.map(({ name, summary, image, linkPreview, linkSource, slug, details, tech, outcomes }, index) => {
+    projects.map(({ name, summary, image, linkSource, details, tech, outcomes }, index) => {
       const top = 98 + index * 40;
       return (
         <div

@@ -1,4 +1,4 @@
-import type { SiteConfig, SiteContent, AcademicProjectProps, SkillsProps } from "../types";
+import type { SiteConfig, SiteContent, SkillsProps } from "../types";
 import { I18N } from "./i18n";
 import type { LocaleKey } from "./i18n";
 

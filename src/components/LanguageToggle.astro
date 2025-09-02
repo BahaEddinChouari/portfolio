@@ -1,7 +1,6 @@
 ---
 const { currentLocale } = Astro.props;
 const targetLocale = currentLocale === "en" ? "fr" : "en";
-const targetLabel = targetLocale.toUpperCase();
 ---
 
 <div class="language-toggle">
@@ -25,7 +24,6 @@ const targetLabel = targetLocale.toUpperCase();
       toggleBtn.addEventListener('click', (e) => {
         e.preventDefault();
         const targetLocale = toggleBtn.getAttribute('data-target-locale');
-        const currentUrl = window.location.pathname;
         const currentHash = window.location.hash;
         
         // Construire la nouvelle URL
